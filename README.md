@@ -16,6 +16,12 @@ $ cd truffle
 $ npm install --save @openzeppelin/contracts
 ```
 
+Install some dependencies ( folder terluar )
+
+```sh
+$ npm install --save chai chai-bn chai-as-promised  
+```
+
 ```sh
 # Truffle Commant
 $ truffle developer # to use blockchain
