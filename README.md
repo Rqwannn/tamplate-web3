@@ -12,14 +12,14 @@ Run the `unbox` command using 1 of 2 ways.
 # Install Truffle globally and run `truffle unbox`
 $ npm install -g truffle
 $ truffle unbox react # Install Truffle Project
-$ cd truffle
-$ npm install --save @openzeppelin/contracts
 ```
 
-Install some dependencies ( folder terluar )
+Install some dependencies ( folder truffle )
 
 ```sh
+$ npm install --save @openzeppelin/contracts
 $ npm install --save chai chai-bn chai-as-promised  
+$ npm install --save dotenv
 ```
 
 ```sh

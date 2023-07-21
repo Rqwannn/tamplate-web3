@@ -1,8 +1,12 @@
 const MyToken = artifacts.require("MyToken.sol");
 const MyTokenSale = artifacts.require("MyTokenSale");
 
+require("dotenv").config({
+    path: "../.env"
+})
+
 module.exports = async function (deployer) {
-    const initialSupply = 1000000; // Ubah nilai initialSupply sesuai kebutuhan
+    const initialSupply = process.env.INITIAL_TOKENS; // Ubah nilai initialSupply sesuai kebutuhan
     let addr = await web3.eth.getAccounts();
 
     await deployer.deploy(MyToken, initialSupply);
