@@ -47,7 +47,7 @@ contract("Token Test", async (accounts) => {
         expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(totalSupply.sub(new BN(sendTokens)));
 
         // Memastikan bahwa saldo akun penerima bertambah sebanyak sendTokens setelah transfer
-        expect(instance.balanceOf(recipient)).to.eventually.be.a.bignumber.equal(new BN(sendTokens));
+        return expect(instance.balanceOf(recipient)).to.eventually.be.a.bignumber.equal(new BN(sendTokens));
 
     })
 
@@ -60,7 +60,7 @@ contract("Token Test", async (accounts) => {
 
         // Verifikasi bahwa saldo deployer tetap sama setelah transaksi ditolak
         await expect(instance.transfer(recipient, amountToSend)).to.eventually.be.rejected;
-        expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(balanceOfDeployer);
+        return expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(balanceOfDeployer);
     })
 
 })
