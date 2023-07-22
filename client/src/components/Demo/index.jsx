@@ -5,6 +5,9 @@ import Cta from "./Cta";
 import Contract from "./Contract";
 import ContractBtns from "./ContractBtns";
 import Desc from "./Desc";
+
+import TokenInput from "./TokenInput";
+import ListAddress from "./ListAddress";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
 
@@ -12,22 +15,32 @@ function Demo() {
   const { state } = useEth();
   const [value, setValue] = useState("?");
 
+  // demo adalah bagaian "See it in action"
+
   const demo =
     <>
-      <Cta />
-      <div className="contract-container">
-        <Contract value={value} />
-        <ContractBtns setValue={setValue} />
+      {/* <Cta /> */}
+      
+      <div className="contract-container" style={{
+          display: "flex",
+          flexDirection: "column",
+      }}>
+        {/* <Contract value={value} />
+        // <ContractBtns setValue={setValue} /> */}
+
+        <ListAddress value={value} />
+        <TokenInput setValue={setValue} />
       </div>
-      <Desc />
+
+      {/* <Desc /> */}
     </>;
 
   return (
     <div className="demo">
       <Title />
       {
-        !state.artifact ? <NoticeNoArtifact /> :
-          !state.contract ? <NoticeWrongNetwork /> :
+        !state.myTokenArtifact ? <NoticeNoArtifact /> :
+          !state.myTokenInstance ? <NoticeWrongNetwork /> :
             demo
       }
     </div>

@@ -3,11 +3,15 @@ const actions = {
 };
 
 const initialState = {
-  artifact: null,
+  myTokenArtifact: null,
+  myTokenSaleArtifact: null,
+  kycContractArtifact: null,
   web3: null,
   accounts: null,
   networkID: null,
-  contract: null
+  myTokenInstance: null,
+  myTokenSaleInstance: null,
+  kycContractInstance: null,
 };
 
 const reducer = (state, action) => {

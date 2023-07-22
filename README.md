@@ -23,9 +23,14 @@ $ npm install --save dotenv
 ```
 
 ```sh
-# Truffle Commant
+# Truffle Commantweb
 $ truffle developer # to use blockchain
 $ migrate 
+$ web3 console 
+# lakukan ini sebelum test send token dari front end pakai key account sendiri
+# account[0] karena sudah di migrate terus di config truffle host: "127.0.0.1", dan network id ganache jadi accoundnya banyak
+# lebih tepatnya buat transfer coin eth ke akun utama kita dari accountS[0] akun ganache
+# $ web3.eth.sendTransaction({to:"0xD8eF85D0c0F4df7955b8E085FaF66B1EB974eA73", from:accountS[0], value: web3.utils.toWei("2", "ether")})
 ```
 
 ```sh
