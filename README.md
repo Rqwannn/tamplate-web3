@@ -20,6 +20,7 @@ Install some dependencies ( folder truffle )
 $ npm install --save @openzeppelin/contracts
 $ npm install --save chai chai-bn chai-as-promised  
 $ npm install --save dotenv
+$ npm install --save @truffle/hdwallet-provider
 ```
 
 ```sh
@@ -27,6 +28,8 @@ $ npm install --save dotenv
 $ truffle developer # to use blockchain
 $ migrate 
 $ web3 console 
+$ truffle migrate --network ganache_local
+$ truffle migrate --network ganache_local --reset # jika network up to date
 # lakukan ini sebelum test send token dari front end pakai key account sendiri
 # account[0] karena sudah di migrate terus di config truffle host: "127.0.0.1", dan network id ganache jadi accoundnya banyak
 # lebih tepatnya buat transfer coin eth ke akun utama kita dari accountS[0] akun ganache

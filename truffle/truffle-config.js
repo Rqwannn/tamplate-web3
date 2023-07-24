@@ -41,10 +41,13 @@
  * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
 
-// require('dotenv').config();
-// const { MNEMONIC, PROJECT_ID } = process.env;
+require('dotenv').config({
+  path: "./.env"
+});
+const { MNEMONIC, PROJECT_ID } = process.env;
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const AccountIndex = 0;
 
 module.exports = {
   /**
@@ -69,6 +72,12 @@ module.exports = {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port 8545 (default: none), ganache port 7545
      network_id: "*",       // Any network * (default: none), ganache network 5777
+    },
+    ganache_local:{
+      provider: () => {
+        return new HDWalletProvider(MNEMONIC, "http://127.0.0.1:7545", AccountIndex);
+      },
+      network_id: 5777,
     },
     //
     // An additional network, but with some advanced options…
