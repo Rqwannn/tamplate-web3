@@ -1,33 +1,34 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import useEth from "../../contexts/EthContext/useEth";
+import { reducer, initialState } from "../../contexts/EthContext/state";
 
-function TokenInput({ setValue }) {
-  const { state: { myTokenInstance, accounts, kycContractInstance } } = useEth();
-  const [inputValue, setInputValue] = useState("0x123...");
+function TokenBuy({ setValue }) {
+  const { state: { myTokenSaleInstance, accounts, web3 } } = useEth();
+  const [inputValue, setInputValue] = useState("");
+
+  const [dispatch] = useReducer(reducer, initialState);
 
   const handleInputChange = e => {
-    // if (/^\d+$|^$/.test(e.target.value)) {
       setInputValue(e.target.value);
-    // }
-  };
-
-  const read = async () => {
-    const value = await myTokenInstance.methods.read().call({ from: accounts[0] });
-    setValue(value);
   };
 
   const write = async e => {
     
-    if (e.target.tagName === "INPUT") {
-      return;
-    }
-    if (inputValue === "") {
-      alert("Please enter a value to write.");
-      return;
-    }
+    // if (e.target.tagName === "INPUT") {
+    //   return;
+    // }
+
+    // if (inputValue === "") {
+    //   alert("Please enter a value to buy.");
+    //   return;
+    // }
+
+    await myTokenSaleInstance.methods.buyTokens(accounts[0]).send({
+      from: accounts[0],
+      value: web3.utils.toWei("1", "wei")
+    })
     
-    await kycContractInstance.methods.setKycCompleted(inputValue).send({ from: accounts[0] })
-    alert(`KYC for ${inputValue} was successfully completed`)
+    alert(`RQT Token for 1 wei was successfully`)
   };
 
   const buttonStyle = {
@@ -46,7 +47,8 @@ function TokenInput({ setValue }) {
                 width: "350px", marginTop: "14px", display: "flex", flexDirection: "column"
             }
         }>
-        Write Your Address
+
+        Buy Your Token Here
         
         <input
           style={
@@ -68,12 +70,9 @@ function TokenInput({ setValue }) {
         display: "flex",
       }}>
         <button onClick={write} style={buttonStyle}>
-            Add To Whitelist
+            Buy Token
         </button>
 
-        <button onClick={read} style={buttonStyle}>
-            Read Whitelist
-        </button>
       </div>
 
 
@@ -81,4 +80,4 @@ function TokenInput({ setValue }) {
   );
 }
 
-export default TokenInput;
+export default TokenBuy;

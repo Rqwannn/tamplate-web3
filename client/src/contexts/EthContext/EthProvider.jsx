@@ -34,20 +34,43 @@ function EthProvider({ children }) {
       const kycContractNetworkAddress = KycContract.networks[networkID];
       const kycContractInstance = new web3.eth.Contract(KycContract.abi, kycContractNetworkAddress && kycContractAddress);
 
+      const updateUserToken = async (e) => {
+        let userTokens = await myTokenInstance.methods.balanceOf(accounts[0]).call();
+
+        dispatch({
+          type: actions.init,
+            data: {
+                userToken: userTokens,
+            }
+          });
+      }
+
+      updateUserToken()
+
+      myTokenInstance.events.Transfer({
+        to: accounts[0]
+      }).on("data", updateUserToken)
+
       dispatch({
         type: actions.init,
         data: {
           myTokenArtifact: MyToken,
-          MyTokenSaleArtifact: MyTokenSale,
-          KycContractArtifact: KycContract,
+          myTokenSaleArtifact: MyTokenSale,
+          kycContractArtifact: KycContract,
           web3,
           accounts,
           networkID,
-          myTokenInstance,
-          myTokenSaleInstance,
-          kycContractInstance
+          myTokenInstance: myTokenInstance,
+          myTokenSaleInstance: myTokenSaleInstance,
+          kycContractInstance: kycContractInstance,
+          tokenAddress: {
+            token: myTokenInstance._address,
+            tokenSale: myTokenSaleInstance._address,
+            kyc: kycContractInstance._address,
+          }
         }
       });
+
   }, []);
 
   useEffect(() => {

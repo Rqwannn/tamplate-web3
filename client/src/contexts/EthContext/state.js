@@ -12,6 +12,12 @@ const initialState = {
   myTokenInstance: null,
   myTokenSaleInstance: null,
   kycContractInstance: null,
+  tokenAddress: {
+    token: null,
+    tokenSale: null,
+    Kyc: null,
+  },
+  userToken: 0,
 };
 
 const reducer = (state, action) => {
