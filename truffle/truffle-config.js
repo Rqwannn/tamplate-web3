@@ -73,6 +73,18 @@ module.exports = {
      port: 7545,            // Standard Ethereum port 8545 (default: none), ganache port 7545
      network_id: "*",       // Any network * (default: none), ganache network 5777
     },
+    goerli_infura:{
+      provider: () => {
+        return new HDWalletProvider(MNEMONIC, "https://goerli.infura.io/v3/ceceb0157c414f4ca5b2ab570b2e0baf", AccountIndex);
+      },
+      network_id: 5,
+    },
+    sepolia_infura:{
+      provider: () => {
+        return new HDWalletProvider(MNEMONIC, "https://sepolia.infura.io/v3/ceceb0157c414f4ca5b2ab570b2e0baf", AccountIndex);
+      },
+      network_id: 11155111,
+    },
     ganache_local:{
       provider: () => {
         return new HDWalletProvider(MNEMONIC, "http://127.0.0.1:7545", AccountIndex);
